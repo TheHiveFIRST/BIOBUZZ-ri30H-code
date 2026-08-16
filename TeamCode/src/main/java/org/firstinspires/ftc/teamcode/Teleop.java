@@ -17,7 +17,7 @@ public class Teleop extends LinearOpMode {
         chassis= new DriveSubsystem(hardwareMap);
 
 
-        ClawSubsystem CLAW = new ClawSubsystem(hardwareMap);
+        ClawSubsystem claw = new ClawSubsystem(hardwareMap);
 
 
 
@@ -44,9 +44,9 @@ public class Teleop extends LinearOpMode {
 
 
             if (gamepad1.x) {
-                CLAW.CloseClaw();
+                claw.CloseClaw();
             } else {
-                CLAW.OpenClaw();
+                claw.OpenClaw();
             }
 
 
@@ -55,6 +55,7 @@ public class Teleop extends LinearOpMode {
 
             // Run the PID every loop
             arm.updatePower();
+
             chassis.update();
 
             // Telemetry

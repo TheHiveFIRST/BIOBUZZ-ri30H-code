@@ -10,10 +10,10 @@ public class DriveSubsystem {
     private DcMotor BR;
     private DcMotor FR;
 
-    private double forward;
-    private double strafe;
-    private double turn;
-    private boolean slowmode = false;
+    private double mForward;
+    private double mStrafe;
+    private double mTurn;
+    private boolean mSlowmode = false;
 
     public DriveSubsystem(HardwareMap hardwareMap){
       BL = hardwareMap.get(DcMotor.class, "BL");
@@ -31,17 +31,17 @@ public class DriveSubsystem {
     }
 
     public void updateInputs(double newForward, double newStrafe, double newTurn){
-        forward = newForward;
-        strafe = newStrafe;
-        turn = newTurn;
+        mForward = newForward;
+        mStrafe = newStrafe;
+        mTurn = newTurn;
     }
     public void update(){
         double speedCapFactor;
-        speedCapFactor = 1 / (Math.abs(forward) + Math.abs(strafe) + Math.abs(turn));
-        BL.setPower((forward + strafe + turn) * speedCapFactor);
-        FL.setPower((forward - strafe + turn) * speedCapFactor);
-        BR.setPower((forward - strafe - turn) * speedCapFactor);
-        FR.setPower((forward + strafe - turn) * speedCapFactor);
+        speedCapFactor = 1 / (Math.abs(mForward) + Math.abs(mStrafe) + Math.abs(mTurn));
+        BL.setPower((mForward + mStrafe + mTurn) * speedCapFactor);
+        FL.setPower((mForward - mStrafe + mTurn) * speedCapFactor);
+        BR.setPower((mForward - mStrafe - mTurn) * speedCapFactor);
+        FR.setPower((mForward + mStrafe - mTurn) * speedCapFactor);
 
     }
 

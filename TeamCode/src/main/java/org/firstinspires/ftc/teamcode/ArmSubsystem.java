@@ -24,17 +24,17 @@ public class ArmSubsystem {
 
     }
 
-    private double target = 0;
+    private double mTarget = 0;
 
     public void setTarget(double newTarget) {
-        target = newTarget;
+        mTarget = newTarget;
     }
 
     public void updatePower() {
 
         double position = armMotor.getCurrentPosition();
 
-        double error = target - position;
+        double error = mTarget - position;
 
         double power = error * Constants.ArmConstants.ARM_KP;
 
@@ -48,7 +48,7 @@ public class ArmSubsystem {
 
 
     public double getTarget() {
-        return target;
+        return mTarget;
     }
 
     public int getPosition() {
