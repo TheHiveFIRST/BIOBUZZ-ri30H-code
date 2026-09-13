@@ -9,7 +9,7 @@ public class Teleop extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        ArmSubsystem arm = new ArmSubsystem(hardwareMap);
+        elasticsSubsystem arm = new elasticsSubsystem(hardwareMap);
 
 
         DriveSubsystem chassis;
@@ -17,7 +17,7 @@ public class Teleop extends LinearOpMode {
         chassis= new DriveSubsystem(hardwareMap);
 
 
-        ClawSubsystem claw = new ClawSubsystem(hardwareMap);
+        LatchSubsystem claw = new LatchSubsystem(hardwareMap);
 
 
 
@@ -43,11 +43,7 @@ public class Teleop extends LinearOpMode {
                 arm.setTarget(Constants.ArmConstants.ARM_UP_POSITION);
 
 
-            if (gamepad1.x) {
-                claw.CloseClaw();
-            } else {
-                claw.OpenClaw();
-            }
+
 
 
 
