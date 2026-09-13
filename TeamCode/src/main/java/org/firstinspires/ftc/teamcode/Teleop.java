@@ -19,6 +19,8 @@ public class Teleop extends LinearOpMode {
 
         LatchSubsystem claw = new LatchSubsystem(hardwareMap);
 
+        IntakeSubsystem intake = new IntakeSubsystem(hardwareMap);
+
 
 
 
@@ -31,16 +33,34 @@ public class Teleop extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            // Preset Positions
+            // Intake controls
 
-            if (gamepad1.a)
-                arm.setTarget(Constants.ArmConstants.ARM_IN_POSITION);
+            if (gamepad1.left_trigger_pressed) {
+                intake.spin();
+            } else if (gamepad1.b){
+                intake.outtake();
+            } else {
+                intake.stop();
+            }
 
-            if (gamepad1.b)
-                arm.setTarget(Constants.ArmConstants.ARM_DOWN_POSITION);
+            //elastics controls
 
-            if (gamepad1.y)
-                arm.setTarget(Constants.ArmConstants.ARM_UP_POSITION);
+            if(gamepad1.rightTriggerWasReleased()) {
+                arm.setTarget(Constants.ArmConstants.ELASTIC_RELAXED_POSITION);
+            }
+
+            if(Math.abs(arm.getPosition()-Constants.ArmConstants.ELASTIC_RELAXED_POSITION) < 20){
+                arm.setTarget(Constants.ArmConstants.ELASTIC_TENSE_POSITION);
+                claw.Lock();
+            }
+
+            //latch controls
+
+            if(gamepad1.right_trigger_pressed){
+                claw.Unlock();
+            }
+
+
 
 
 
